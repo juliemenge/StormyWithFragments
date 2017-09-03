@@ -114,41 +114,20 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "user is on a tablet", Toast.LENGTH_SHORT).show();
             setContentView(R.layout.tablet_layout);
             ButterKnife.inject(this);
-            //getForecast(37.8267, -122.423);
+
+            //NEED HELP HERE
+            HourlyWeatherFragment hourlyWeatherFragment = new HourlyWeatherFragment();
+            FragmentManager manager = getSupportFragmentManager();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.add(R.id.middlePlaceholder, hourlyWeatherFragment, HOURLY_FORECAST);
+            transaction.addToBackStack(null);
+            transaction.commit();
+
+            Bundle bundle = new Bundle();
+            bundle.putParcelableArray(HOURLY_FORECAST, mForecast.getHourlyForecast());
+            hourlyWeatherFragment.setArguments(bundle);
+
         }
-
-
-
-
-
-        /*
-        boolean isTablet = getResources().getBoolean(R.bool.is_tablet); //look at config files to determine screen size
-
-        //user is on a phone
-        if(!isTablet) {
-            //set the buttons to replace the main fragment contents with daily or hourly fragments
-            mHourlyButton = (Button) findViewById(R.id.hourlyButton);
-            mDailyButton = (Button) findViewById(R.id.dailyButton);
-
-            mHourlyButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    HourlyWeatherFragment fragment = new HourlyWeatherFragment();
-                    FragmentManager fragmentManager = getSupportFragmentManager();
-                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.placeholder, fragment, HOURLY_FORECAST);
-                    transaction.addToBackStack(null);
-                    transaction.commit();
-                }
-            });
-
-
-        } else { //user is on a tablet
-            //set up tri pane fragment, keep the first part as activity main, set middle and right placeholders as daily and hourly
-        }
-        */
-
-
 
         mProgressBar.setVisibility(View.INVISIBLE);
 
@@ -353,37 +332,6 @@ public class MainActivity extends AppCompatActivity {
         AlertDialogFragment dialog = new AlertDialogFragment();
         dialog.show(getFragmentManager(), "error_dialog");
     }
-
-/*
-    //replace the current weather fragment with the hourly or 7-day fragment when the corresponding button is clicked
-    @Override
-    public void onClick(View view) {
-        //Fragment fragment = null;
-        switch (view.getId()) {
-            case R.id.hourlyButton:
-                Toast.makeText(this, "hourly button clicked", Toast.LENGTH_SHORT).show();
-                //fragment = new HourlyWeatherFragment();
-                //replaceFragment(fragment);
-                break;
-
-            case R.id.dailyButton:
-                Toast.makeText(this, "daily button clicked", Toast.LENGTH_SHORT).show();
-                //fragment = new DailyWeatherFragment();
-                //replaceFragment(fragment);
-                break;
-        }
-    }
-
-    private void replaceFragment(Fragment fragment) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.placeholder, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
-    */
-
-
-
 
 }
 

@@ -50,7 +50,6 @@ public class DailyWeatherFragment extends Fragment {
                         dayOfTheWeek,
                         highTemp,
                         conditions);
-                //Toast.makeText(DailyForecastActivity.getActivity(), message, Toast.LENGTH_LONG).show();
             }
         });
 

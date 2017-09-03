@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     Toast.makeText(MainActivity.this, "daily button clicked", Toast.LENGTH_SHORT).show();
 
+
                     DailyWeatherFragment dailyWeatherFragment = new DailyWeatherFragment();
                     FragmentManager manager = getSupportFragmentManager();
                     FragmentTransaction transaction = manager.beginTransaction();
@@ -107,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
                     Bundle bundle = new Bundle();
                     bundle.putParcelableArray(DAILY_FORECAST, mForecast.getDailyForecast());
                     dailyWeatherFragment.setArguments(bundle);
+
                 }
             });
 
@@ -115,17 +117,18 @@ public class MainActivity extends AppCompatActivity {
             setContentView(R.layout.tablet_layout);
             ButterKnife.inject(this);
 
+
             //NEED HELP HERE
             HourlyWeatherFragment hourlyWeatherFragment = new HourlyWeatherFragment();
             FragmentManager manager = getSupportFragmentManager();
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.add(R.id.middlePlaceholder, hourlyWeatherFragment, HOURLY_FORECAST);
-            transaction.addToBackStack(null);
             transaction.commit();
 
             Bundle bundle = new Bundle();
             bundle.putParcelableArray(HOURLY_FORECAST, mForecast.getHourlyForecast());
             hourlyWeatherFragment.setArguments(bundle);
+
 
         }
 

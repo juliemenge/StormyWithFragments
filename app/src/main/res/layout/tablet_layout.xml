@@ -178,24 +178,6 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true">
 
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="HOURLY"
-                        android:id="@+id/hourlyButton"
-                        android:layout_weight="1"
-                        android:background="#40ffffff"
-                        android:textColor="#ffffffff"/>
-
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="7 DAY"
-                        android:id="@+id/dailyButton"
-                        android:layout_weight="1"
-                        android:background="#40ffffff"
-                        android:textColor="#ffffffff"
-                        android:layout_marginLeft="2dp"/>
                 </LinearLayout>
 
             </RelativeLayout>

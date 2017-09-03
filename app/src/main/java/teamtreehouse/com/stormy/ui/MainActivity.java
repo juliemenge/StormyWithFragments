@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG = MainActivity.class.getSimpleName();
     public static final String DAILY_FORECAST = "DAILY_FORECAST";
     public static final String HOURLY_FORECAST = "HOURLY_FORECAST";
+    private static final String TABLET_FRAGMENT = "TABLET_FRAGMENT";
+    private static final String CURRENT_FORECAST = "CURRENT_FORECAST";
 
     private Forecast mForecast;
     private Button mHourlyButton;
@@ -68,43 +70,56 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
 
-        mHourlyButton = (Button) findViewById(R.id.hourlyButton);
-        mHourlyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "hourly button clicked", Toast.LENGTH_SHORT).show();
+        boolean isTablet = getResources().getBoolean(R.bool.is_tablet); //look at config files to determine screen size
+        if (!isTablet) { //user is on a phone
+            mHourlyButton = (Button) findViewById(R.id.hourlyButton);
+            mHourlyButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(MainActivity.this, "hourly button clicked", Toast.LENGTH_SHORT).show();
 
-                HourlyWeatherFragment hourlyWeatherFragment = new HourlyWeatherFragment();
-                FragmentManager manager = getSupportFragmentManager();
-                FragmentTransaction transaction = manager.beginTransaction();
-                transaction.replace(R.id.placeholder, hourlyWeatherFragment, HOURLY_FORECAST);
-                transaction.addToBackStack(null);
-                transaction.commit();
+                    HourlyWeatherFragment hourlyWeatherFragment = new HourlyWeatherFragment();
+                    FragmentManager manager = getSupportFragmentManager();
+                    FragmentTransaction transaction = manager.beginTransaction();
+                    transaction.replace(R.id.placeholder, hourlyWeatherFragment, HOURLY_FORECAST);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
 
-                Bundle bundle = new Bundle();
-                bundle.putParcelableArray(HOURLY_FORECAST, mForecast.getHourlyForecast());
-                hourlyWeatherFragment.setArguments(bundle);
-            }
-        });
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelableArray(HOURLY_FORECAST, mForecast.getHourlyForecast());
+                    hourlyWeatherFragment.setArguments(bundle);
+                }
+            });
 
-        mDailyButton = (Button) findViewById(R.id.dailyButton);
-        mDailyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "daily button clicked", Toast.LENGTH_SHORT).show();
+            mDailyButton = (Button) findViewById(R.id.dailyButton);
+            mDailyButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(MainActivity.this, "daily button clicked", Toast.LENGTH_SHORT).show();
 
-                DailyWeatherFragment dailyWeatherFragment = new DailyWeatherFragment();
-                FragmentManager manager = getSupportFragmentManager();
-                FragmentTransaction transaction = manager.beginTransaction();
-                transaction.replace(R.id.placeholder, dailyWeatherFragment, DAILY_FORECAST);
-                transaction.addToBackStack(null);
-                transaction.commit();
+                    DailyWeatherFragment dailyWeatherFragment = new DailyWeatherFragment();
+                    FragmentManager manager = getSupportFragmentManager();
+                    FragmentTransaction transaction = manager.beginTransaction();
+                    transaction.replace(R.id.placeholder, dailyWeatherFragment, DAILY_FORECAST);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
 
-                Bundle bundle = new Bundle();
-                bundle.putParcelableArray(DAILY_FORECAST, mForecast.getDailyForecast());
-                dailyWeatherFragment.setArguments(bundle);
-            }
-        });
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelableArray(DAILY_FORECAST, mForecast.getDailyForecast());
+                    dailyWeatherFragment.setArguments(bundle);
+                }
+            });
+
+        } else {
+            Toast.makeText(MainActivity.this, "user is on a tablet", Toast.LENGTH_SHORT).show();
+            setContentView(R.layout.tablet_layout);
+            ButterKnife.inject(this);
+            //getForecast(37.8267, -122.423);
+        }
+
+
+
+
 
         /*
         boolean isTablet = getResources().getBoolean(R.bool.is_tablet); //look at config files to determine screen size

@@ -178,6 +178,15 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true">
 
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="GET MORE DETAILS"
+                        android:id="@+id/moreDetailsButton"
+                        android:layout_weight="1"
+                        android:background="#40ffffff"
+                        android:textColor="#ffffffff"/>
+
                 </LinearLayout>
 
             </RelativeLayout>
@@ -189,27 +198,32 @@
             android:id="@+id/middlePlaceholder"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@drawable/bg_gradient"
+            >
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="hourlyWeather"/>
+                android:text="hourly weather here"/>
         </FrameLayout>
 
         <FrameLayout
             android:id="@+id/rightPlaceholder"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@drawable/bg_gradient"
+            >
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="dailyWeather"/>
+                android:text="daily weather here"/>
         </FrameLayout>
+
 
     </LinearLayout>
 </LinearLayout>

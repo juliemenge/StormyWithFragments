@@ -46,12 +46,11 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG = MainActivity.class.getSimpleName();
     public static final String DAILY_FORECAST = "DAILY_FORECAST";
     public static final String HOURLY_FORECAST = "HOURLY_FORECAST";
-    private static final String TABLET_FRAGMENT = "TABLET_FRAGMENT";
-    private static final String CURRENT_FORECAST = "CURRENT_FORECAST";
 
     private Forecast mForecast;
     private Button mHourlyButton;
     private Button mDailyButton;
+    private Button mMoreDetailsButton;
 
 
     @InjectView(R.id.timeLabel) TextView mTimeLabel;
@@ -71,6 +70,23 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.inject(this);
 
         boolean isTablet = getResources().getBoolean(R.bool.is_tablet); //look at config files to determine screen size
+
+        mProgressBar.setVisibility(View.INVISIBLE);
+
+        final double latitude = 37.8267;
+        final double longitude = -122.423;
+
+        mRefreshImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getForecast(latitude, longitude);
+            }
+        });
+
+        getForecast(latitude, longitude);
+
+        Log.d(TAG, "Main UI code is running!");
+
         if (!isTablet) { //user is on a phone
             mHourlyButton = (Button) findViewById(R.id.hourlyButton);
             mHourlyButton.setOnClickListener(new View.OnClickListener() {
@@ -88,6 +104,8 @@ public class MainActivity extends AppCompatActivity {
                     Bundle bundle = new Bundle();
                     bundle.putParcelableArray(HOURLY_FORECAST, mForecast.getHourlyForecast());
                     hourlyWeatherFragment.setArguments(bundle);
+
+
                 }
             });
 
@@ -117,36 +135,75 @@ public class MainActivity extends AppCompatActivity {
             setContentView(R.layout.tablet_layout);
             ButterKnife.inject(this);
 
+            mMoreDetailsButton = (Button) findViewById(R.id.moreDetailsButton);
+            mMoreDetailsButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(MainActivity.this, "more details button clicked", Toast.LENGTH_SHORT).show();
 
-            //NEED HELP HERE
+                    /*
+                    //hourly weather info displayed
+                    HourlyWeatherFragment hourlyWeatherFragment = new HourlyWeatherFragment();
+                    FragmentManager manager = getSupportFragmentManager();
+                    FragmentTransaction transaction = manager.beginTransaction();
+                    transaction.replace(R.id.middlePlaceholder, hourlyWeatherFragment, HOURLY_FORECAST);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelableArray(HOURLY_FORECAST, mForecast.getHourlyForecast());
+                    hourlyWeatherFragment.setArguments(bundle);
+
+                    //daily weather info displayed
+                    DailyWeatherFragment dailyWeatherFragment = new DailyWeatherFragment();
+                    FragmentManager dailyManager = getSupportFragmentManager();
+                    FragmentTransaction dailyTransaction = manager.beginTransaction();
+                    transaction.replace(R.id.rightPlaceholder, dailyWeatherFragment, DAILY_FORECAST);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+
+                    Bundle dailyBundle = new Bundle();
+                    dailyBundle.putParcelableArray(DAILY_FORECAST, mForecast.getDailyForecast());
+                    dailyWeatherFragment.setArguments(dailyBundle);
+                    */
+
+                    //display both on button click
+                    HourlyWeatherFragment hourlyWeatherFragment = new HourlyWeatherFragment();
+                    DailyWeatherFragment dailyWeatherFragment = new DailyWeatherFragment();
+                    FragmentManager manager = getSupportFragmentManager();
+                    FragmentTransaction transaction = manager.beginTransaction();
+                    transaction.replace(R.id.middlePlaceholder, hourlyWeatherFragment, HOURLY_FORECAST);
+                    transaction.replace(R.id.rightPlaceholder, dailyWeatherFragment, DAILY_FORECAST);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelableArray(HOURLY_FORECAST, mForecast.getHourlyForecast());
+                    bundle.putParcelableArray(DAILY_FORECAST, mForecast.getDailyForecast());
+                    hourlyWeatherFragment.setArguments(bundle);
+                    dailyWeatherFragment.setArguments(bundle);
+
+
+                }
+            });
+
+
+            /* WITHOUT DETAILS BUTTON
             HourlyWeatherFragment hourlyWeatherFragment = new HourlyWeatherFragment();
             FragmentManager manager = getSupportFragmentManager();
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.add(R.id.middlePlaceholder, hourlyWeatherFragment, HOURLY_FORECAST);
+            transaction.addToBackStack(null);
             transaction.commit();
 
-            Bundle bundle = new Bundle();
-            bundle.putParcelableArray(HOURLY_FORECAST, mForecast.getHourlyForecast());
-            hourlyWeatherFragment.setArguments(bundle);
+            Bundle hourlyBundle = new Bundle();
+            hourlyBundle.putParcelableArray(HOURLY_FORECAST, mForecast.getHourlyForecast());
+            hourlyWeatherFragment.setArguments(hourlyBundle);
+            */
 
 
         }
 
-        mProgressBar.setVisibility(View.INVISIBLE);
-
-        final double latitude = 37.8267;
-        final double longitude = -122.423;
-
-        mRefreshImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getForecast(latitude, longitude);
-            }
-        });
-
-        getForecast(latitude, longitude);
-
-        Log.d(TAG, "Main UI code is running!");
     }
 
     private void getForecast(double latitude, double longitude) {

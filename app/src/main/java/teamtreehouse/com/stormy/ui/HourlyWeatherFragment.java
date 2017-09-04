@@ -15,7 +15,7 @@ import teamtreehouse.com.stormy.weather.Hour;
 
 public class HourlyWeatherFragment extends Fragment {
 
-    private Hour[] mHours;
+    //private Hour[] mHours;
     RecyclerView mRecyclerView;
 
     //@InjectView(R.id.recyclerView) RecyclerView mRecyclerView;
@@ -26,12 +26,14 @@ public class HourlyWeatherFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_hourly_weather, container, false);
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        Hour[] hours;
 
         Bundle bundle = getArguments();
         Parcelable[] parcelables = bundle.getParcelableArray(MainActivity.HOURLY_FORECAST);
-        mHours = (Hour[]) parcelables;
+        hours = (Hour[]) parcelables;
 
-        HourAdapter adapter = new HourAdapter(getActivity(), mHours);
+
+        HourAdapter adapter = new HourAdapter(getActivity(), hours);
         mRecyclerView.setAdapter(adapter);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());

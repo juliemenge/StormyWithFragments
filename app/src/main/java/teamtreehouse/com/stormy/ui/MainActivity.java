@@ -62,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
     @InjectView(R.id.refreshImageView) ImageView mRefreshImageView;
     @InjectView(R.id.progressBar) ProgressBar mProgressBar;
 
+    final double latitude = 37.8267;
+    final double longitude = -122.423;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,6 +137,15 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "user is on a tablet", Toast.LENGTH_SHORT).show();
             setContentView(R.layout.tablet_layout);
             ButterKnife.inject(this);
+
+            mRefreshImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getForecast(latitude, longitude);
+                    updateDisplay();
+                }
+            });
+
 
             mMoreDetailsButton = (Button) findViewById(R.id.moreDetailsButton);
             mMoreDetailsButton.setOnClickListener(new View.OnClickListener() {

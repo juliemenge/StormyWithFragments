@@ -170,17 +170,17 @@
                 android:id="@+id/hourlyButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="10dp"
                 android:layout_weight="1"
                 android:background="#40ffffff"
-                android:text="HOURLY LANDSCAPE"
+                android:text="HOURLY"
                 android:textColor="#ffffffff"/>
 
             <Button
                 android:id="@+id/dailyButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="2dp"
                 android:layout_weight="1"
                 android:background="#40ffffff"

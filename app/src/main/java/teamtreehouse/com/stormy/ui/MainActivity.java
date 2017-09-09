@@ -76,9 +76,6 @@ public class MainActivity extends AppCompatActivity {
 
         mProgressBar.setVisibility(View.INVISIBLE);
 
-        //final double latitude = 37.8267;
-        //final double longitude = -122.423;
-
         mRefreshImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -148,32 +145,6 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
 
-                    /*
-                    //hourly weather info displayed
-                    HourlyWeatherFragment hourlyWeatherFragment = new HourlyWeatherFragment();
-                    FragmentManager manager = getSupportFragmentManager();
-                    FragmentTransaction transaction = manager.beginTransaction();
-                    transaction.replace(R.id.middlePlaceholder, hourlyWeatherFragment, HOURLY_FORECAST);
-                    transaction.addToBackStack(null);
-                    transaction.commit();
-
-                    Bundle bundle = new Bundle();
-                    bundle.putParcelableArray(HOURLY_FORECAST, mForecast.getHourlyForecast());
-                    hourlyWeatherFragment.setArguments(bundle);
-
-                    //daily weather info displayed
-                    DailyWeatherFragment dailyWeatherFragment = new DailyWeatherFragment();
-                    FragmentManager dailyManager = getSupportFragmentManager();
-                    FragmentTransaction dailyTransaction = manager.beginTransaction();
-                    transaction.replace(R.id.rightPlaceholder, dailyWeatherFragment, DAILY_FORECAST);
-                    transaction.addToBackStack(null);
-                    transaction.commit();
-
-                    Bundle dailyBundle = new Bundle();
-                    dailyBundle.putParcelableArray(DAILY_FORECAST, mForecast.getDailyForecast());
-                    dailyWeatherFragment.setArguments(dailyBundle);
-                    */
-
                     //display both on button click
                     HourlyWeatherFragment hourlyWeatherFragment = new HourlyWeatherFragment();
                     DailyWeatherFragment dailyWeatherFragment = new DailyWeatherFragment();
@@ -193,32 +164,17 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             });
-
-
-            /* WITHOUT DETAILS BUTTON
-            HourlyWeatherFragment hourlyWeatherFragment = new HourlyWeatherFragment();
-            FragmentManager manager = getSupportFragmentManager();
-            FragmentTransaction transaction = manager.beginTransaction();
-            transaction.add(R.id.middlePlaceholder, hourlyWeatherFragment, HOURLY_FORECAST);
-            transaction.addToBackStack(null);
-            transaction.commit();
-
-            Bundle hourlyBundle = new Bundle();
-            hourlyBundle.putParcelableArray(HOURLY_FORECAST, mForecast.getHourlyForecast());
-            hourlyWeatherFragment.setArguments(hourlyBundle);
-            */
-
-
         }
 
     }
 
-    //on pause and onresume
     @Override
     protected void onPause(){
         super.onPause();
 
     }
+
+    //refresh forecast on resume
     @Override
     protected void onResume(){
         super.onResume();

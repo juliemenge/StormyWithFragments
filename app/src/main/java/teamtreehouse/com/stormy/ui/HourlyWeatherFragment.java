@@ -15,10 +15,7 @@ import teamtreehouse.com.stormy.weather.Hour;
 
 public class HourlyWeatherFragment extends Fragment {
 
-    //private Hour[] mHours;
     RecyclerView mRecyclerView;
-
-    //@InjectView(R.id.recyclerView) RecyclerView mRecyclerView;
 
     @Nullable
     @Override

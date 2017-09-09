@@ -95,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
             mHourlyButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(MainActivity.this, "hourly button clicked", Toast.LENGTH_SHORT).show();
 
                     HourlyWeatherFragment hourlyWeatherFragment = new HourlyWeatherFragment();
                     FragmentManager manager = getSupportFragmentManager();
@@ -116,8 +115,6 @@ public class MainActivity extends AppCompatActivity {
             mDailyButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(MainActivity.this, "daily button clicked", Toast.LENGTH_SHORT).show();
-
 
                     DailyWeatherFragment dailyWeatherFragment = new DailyWeatherFragment();
                     FragmentManager manager = getSupportFragmentManager();
@@ -134,7 +131,6 @@ public class MainActivity extends AppCompatActivity {
             });
 
         } else {
-            Toast.makeText(MainActivity.this, "user is on a tablet", Toast.LENGTH_SHORT).show();
             setContentView(R.layout.tablet_layout);
             ButterKnife.inject(this);
 
@@ -151,7 +147,6 @@ public class MainActivity extends AppCompatActivity {
             mMoreDetailsButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(MainActivity.this, "more details button clicked", Toast.LENGTH_SHORT).show();
 
                     /*
                     //hourly weather info displayed

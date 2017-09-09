@@ -54,33 +54,35 @@
                     android:layout_marginTop="50dp"/>
 
                 <TextView
+                    android:id="@+id/timeLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="..."
-                    android:id="@+id/timeLabel"
-                    android:layout_above="@+id/degreeImageView"
+                    android:layout_below="@+id/locationLabel"
                     android:layout_centerHorizontal="true"
+                    android:text="..."
                     android:textColor="#80ffffff"
                     android:textSize="18sp"/>
 
                 <TextView
+                    android:id="@+id/locationLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Alcatraz Island, CA"
-                    android:id="@+id/locationLabel"
-                    android:layout_above="@+id/timeLabel"
+                    android:layout_below="@+id/refreshImageView"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="60dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Alcatraz Island, CA"
                     android:textColor="@android:color/white"
-                    android:textSize="24sp"/>
+                    android:textSize="20sp"/>
 
                 <ImageView
+                    android:id="@+id/iconImageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/iconImageView"
-                    android:layout_alignBottom="@+id/locationLabel"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="false"
+                    android:layout_alignParentStart="false"
+                    android:layout_below="@+id/summaryLabel"
+                    android:layout_centerHorizontal="true"
                     android:src="@drawable/cloudy_night"/>
 
                 <LinearLayout
@@ -143,21 +145,21 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/summaryLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Getting current weather..."
-                    android:id="@+id/summaryLabel"
-                    android:layout_below="@+id/linearLayout"
+                    android:layout_below="@+id/timeLabel"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="40dp"
+                    android:gravity="center_horizontal"
+                    android:text="Getting current weather..."
                     android:textColor="@android:color/white"
-                    android:textSize="18dp"
-                    android:gravity="center_horizontal"/>
+                    android:textSize="18dp"/>
 
                 <ImageView
+                    android:id="@+id/refreshImageView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/refreshImageView"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:src="@drawable/refresh"/>
@@ -179,12 +181,13 @@
                     android:layout_alignParentStart="true">
 
                     <Button
+                        android:id="@+id/moreDetailsButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="GET MORE DETAILS"
-                        android:id="@+id/moreDetailsButton"
+                        android:layout_marginBottom="20dp"
                         android:layout_weight="1"
                         android:background="#40ffffff"
+                        android:text="GET MORE DETAILS"
                         android:textColor="#ffffffff"/>
 
                 </LinearLayout>
@@ -202,11 +205,6 @@
             android:background="@drawable/bg_gradient"
             >
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="hourly weather here"/>
         </FrameLayout>
 
         <FrameLayout
@@ -217,11 +215,6 @@
             android:background="@drawable/bg_gradient"
             >
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="daily weather here"/>
         </FrameLayout>
 
 

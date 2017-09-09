@@ -1,15 +1,12 @@
 package teamtreehouse.com.stormy.ui;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -33,7 +30,6 @@ import java.io.IOException;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.OnClick;
 import teamtreehouse.com.stormy.R;
 import teamtreehouse.com.stormy.weather.Current;
 import teamtreehouse.com.stormy.weather.Day;
@@ -65,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
     final double latitude = 37.8267;
     final double longitude = -122.423;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "Main UI code is running!");
 
         if (!isTablet) { //user is on a phone
+            //display hourly weather on button click
             mHourlyButton = (Button) findViewById(R.id.hourlyButton);
             mHourlyButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -104,10 +100,10 @@ public class MainActivity extends AppCompatActivity {
                     bundle.putParcelableArray(HOURLY_FORECAST, mForecast.getHourlyForecast());
                     hourlyWeatherFragment.setArguments(bundle);
 
-
                 }
             });
 
+            //display weekly weather on button click
             mDailyButton = (Button) findViewById(R.id.dailyButton);
             mDailyButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -127,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-        } else {
+        } else { //user is on a tablet
             setContentView(R.layout.tablet_layout);
             ButterKnife.inject(this);
 
@@ -145,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
 
-                    //display both on button click
+                    //display hourly and weekly weather on button click
                     HourlyWeatherFragment hourlyWeatherFragment = new HourlyWeatherFragment();
                     DailyWeatherFragment dailyWeatherFragment = new DailyWeatherFragment();
                     FragmentManager manager = getSupportFragmentManager();
@@ -160,7 +156,6 @@ public class MainActivity extends AppCompatActivity {
                     bundle.putParcelableArray(DAILY_FORECAST, mForecast.getDailyForecast());
                     hourlyWeatherFragment.setArguments(bundle);
                     dailyWeatherFragment.setArguments(bundle);
-
 
                 }
             });
